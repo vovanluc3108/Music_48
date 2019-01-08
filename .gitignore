@@ -18,6 +18,24 @@
 *.zip
 *.tar.gz
 *.rar
+/.idea/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+.gradle/
+.idea/
+Music_48.iml
+Music_482.iml
+app/
+build.gradle
+gradle.properties
+gradle/
+gradlew
+gradlew.bat
+local.properties
+settings.gradle
+.gitignore
+app.iml
+libs/
+proguard-rules.pro
+src/
