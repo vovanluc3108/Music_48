@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="MissingDefaultResource">
+    <item
+        android:id="@+id/menuHome"
+        android:icon="@drawable/ic_menu_home"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/menuGenres"
+        android:icon="@drawable/ic_menu_genres"
+        android:title="@string/genres"/>
+    <item
+        android:id="@+id/menuSearch"
+        android:icon="@drawable/ic_menu_search"
+        android:title="@string/search"/>
+</menu>
