@@ -4,4 +4,9 @@
     <string name="genres">Genres</string>
     <string name="search">Search</string>
     <string name="develop">Develop by BAng</string>
+    <string name="close">Close</string>
+    <string name="open">Open</string>
+    <string name="song">Song</string>
+    <string name="singer">Singer</string>
+    <string name="message_error">"No song in your device"</string>
 </resources>
