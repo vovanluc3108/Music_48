@@ -1,15 +1,16 @@
 package com.framgia.music_48.data.source.local.getlocal;
 
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
-import com.framgia.music_48.R;
 import com.framgia.music_48.data.model.Song;
 import com.framgia.music_48.data.source.local.DataLocalListener;
 import java.util.ArrayList;
 
 public class SongLocal {
+    private static final String URL_IMAGE = "content://media/external/audio/albumart";
     private DataLocalListener mDataLocalListener;
     private ContentResolver mContentResolver;
 
@@ -35,7 +36,8 @@ public class SongLocal {
                 String songTittle = musicCursor.getString(title);
                 String songArtist = musicCursor.getString(artist);
                 String songDuration = musicCursor.getString(duration);
-                String songPoster = musicCursor.getString(poster);
+                String songPoster = String.valueOf(
+                        ContentUris.withAppendedId(Uri.parse(URL_IMAGE), musicCursor.getInt(poster)));
 
                 Song song = new Song.SongBuilder().setID(songId)
                         .setPoster(songPoster)
