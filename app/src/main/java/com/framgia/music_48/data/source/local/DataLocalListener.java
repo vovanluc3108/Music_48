@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface DataLocalListener {
     void onSuccess(List<Song> songs);
-    void onFail(String fail);
+    void onError();
 }

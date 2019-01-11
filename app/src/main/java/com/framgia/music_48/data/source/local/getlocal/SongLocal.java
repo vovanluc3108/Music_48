@@ -1,13 +1,12 @@
 package com.framgia.music_48.data.source.local.getlocal;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import com.framgia.music_48.R;
 import com.framgia.music_48.data.model.Song;
 import com.framgia.music_48.data.source.local.DataLocalListener;
-import com.framgia.music_48.utils.Constant;
 import java.util.ArrayList;
 
 public class SongLocal {
@@ -50,7 +49,7 @@ public class SongLocal {
             musicCursor.close();
             mDataLocalListener.onSuccess(songs);
         } else {
-            mDataLocalListener.onFail(Constant.FAIL);
+            mDataLocalListener.onError();
         }
     }
 }
