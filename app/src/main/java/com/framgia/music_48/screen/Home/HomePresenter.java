@@ -17,12 +17,12 @@ public class HomePresenter implements HomeContract.Presenter {
     public void getSongsLocal() {
         mSongRepository.getDataLocal(new DataLocalListener() {
             @Override
-            public void onSuccess(List<Song> songs) {
+            public void onGetSongLocalSuccess(List<Song> songs) {
                 mView.onGetSongsLocalSuccess(songs);
             }
 
             @Override
-            public void onError() {
+            public void onGetSongLocalError() {
                 mView.onGetSongsLocalError();
             }
         });
