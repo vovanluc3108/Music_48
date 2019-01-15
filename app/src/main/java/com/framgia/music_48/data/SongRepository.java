@@ -1,16 +1,17 @@
 package com.framgia.music_48.data;
 
 import com.framgia.music_48.data.source.local.DataLocalListener;
+import com.framgia.music_48.data.source.remote.DataRemoteListener;
 
 public class SongRepository {
     private static SongRepository sInstance;
     private SongDataSource.localDataSource mLocalDataSource;
-    private SongDataSource.remoteDataSource mRemoteDataSourece;
+    private SongDataSource.remoteDataSource mRemoteDataSource;
 
     private SongRepository(SongDataSource.localDataSource localDataSource,
             SongDataSource.remoteDataSource remoteDataSource) {
         mLocalDataSource = localDataSource;
-        mRemoteDataSourece = remoteDataSource;
+        mRemoteDataSource = remoteDataSource;
     }
 
     public static SongRepository getsInstance(SongDataSource.localDataSource localDataSource,
@@ -23,5 +24,9 @@ public class SongRepository {
 
     public void getDataLocal(DataLocalListener songDataLocalListener){
         mLocalDataSource.getDataLocal(songDataLocalListener);
+    }
+
+    public void getDataRemote(DataRemoteListener dataRemoteListener, String genres){
+        mRemoteDataSource.getDataRemote(dataRemoteListener, genres);
     }
 }

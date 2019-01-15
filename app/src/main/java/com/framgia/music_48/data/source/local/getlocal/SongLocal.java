@@ -49,9 +49,9 @@ public class SongLocal {
                 songs.add(song);
             } while (musicCursor.moveToNext());
             musicCursor.close();
-            mDataLocalListener.onSuccess(songs);
+            mDataLocalListener.onGetSongLocalSuccess(songs);
         } else {
-            mDataLocalListener.onError();
+            mDataLocalListener.onGetSongLocalError();
         }
     }
 }

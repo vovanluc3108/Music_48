@@ -4,6 +4,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Song implements Parcelable {
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
+        @Override
+        public Song createFromParcel(Parcel in) {
+            return new Song(in);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
     private String mId;
     private String mTitle;
     private String mSinger;
@@ -28,18 +39,6 @@ public class Song implements Parcelable {
         mFullDuration = in.readString();
         mUrl = in.readString();
     }
-
-    public static final Creator<Song> CREATOR = new Creator<Song>() {
-        @Override
-        public Song createFromParcel(Parcel in) {
-            return new Song(in);
-        }
-
-        @Override
-        public Song[] newArray(int size) {
-            return new Song[size];
-        }
-    };
 
     public String getId() {
         return mId;
@@ -145,5 +144,16 @@ public class Song implements Parcelable {
         public Song build() {
             return new Song(this);
         }
+    }
+
+    public final class SongEntry {
+        public static final String ID = "id";
+        public static final String TITLE = "title";
+        public static final String TRACK = "track";
+        public static final String USER = "user";
+        public static final String ARTIST = "username";
+        public static final String ARTWORK_URL = "artwork_url";
+        public static final String FULL_DURATION = "full_duration";
+        public static final String DOWNLOAD_URL = "download_url";
     }
 }

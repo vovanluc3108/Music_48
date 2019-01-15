@@ -73,6 +73,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                     .applyDefaultRequestOptions(
                             new RequestOptions().placeholder(R.drawable.song_noimage))
                     .load(song.getPoster())
+                    .apply(RequestOptions.circleCropTransform())
                     .into(mImageViewPoster);
         }
     }

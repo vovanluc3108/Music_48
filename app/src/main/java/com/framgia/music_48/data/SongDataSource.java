@@ -1,6 +1,7 @@
 package com.framgia.music_48.data;
 
 import com.framgia.music_48.data.source.local.DataLocalListener;
+import com.framgia.music_48.data.source.remote.DataRemoteListener;
 
 public interface SongDataSource {
     interface localDataSource {
@@ -8,6 +9,6 @@ public interface SongDataSource {
     }
 
     interface remoteDataSource {
-
+        void getDataRemote(DataRemoteListener dataRemoteListener, String genres);
     }
 }
