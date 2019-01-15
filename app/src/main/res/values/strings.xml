@@ -10,4 +10,9 @@
     <string name="singer">Singer</string>
     <string name="message_error">"No song in your device"</string>
     <string name="poster">poster</string>
+    <string name="audio">audio</string>
+    <string name="alternative_rock">alternative_rock</string>
+    <string name="ambient">ambient</string>
+    <string name="classical">classical</string>
+    <string name="country">country</string>
 </resources>
