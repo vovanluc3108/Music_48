@@ -18,7 +18,7 @@ public class SongRemoteDataSource implements SongDataSource.remoteDataSource {
     }
 
     @Override
-    public void getDataRemote(DataRemoteListener dataRemoteListener, String genres) {
+    public void SongsByGenresRemote(String genres, DataRemoteListener dataRemoteListener) {
         String url = Constant.SITE_GENRES
                 + Constant.CHARTS
                 + Constant.KIND

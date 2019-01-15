@@ -4,7 +4,7 @@
     android:id="@+id/drawerLayoutMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_grey_500"
+    android:background="@drawable/all_background"
     >
 
     <android.support.constraint.ConstraintLayout
@@ -17,7 +17,7 @@
             android:id="@+id/toolbarMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_grey_800"
+            android:background="@drawable/navigator_background"
             />
 
         <android.support.v4.view.ViewPager
@@ -32,7 +32,7 @@
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_grey_800"
+            android:background="@drawable/navigator_background"
             app:itemIconTint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu_bottom_navigation"

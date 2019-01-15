@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/dp_30"
     android:layout_margin="@dimen/dp_10"
+    app:cardCornerRadius="@dimen/dp_30"
     >
 
     <android.support.constraint.ConstraintLayout
@@ -16,29 +16,31 @@
 
         <ImageView
             android:id="@+id/imageViewPoster"
-            android:layout_width="@dimen/dp_70"
-            android:layout_height="@dimen/dp_70"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:contentDescription="@string/poster"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_launcher_round"
-            android:contentDescription="@string/poster"
             />
 
         <TextView
             android:id="@+id/textViewSinger"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_150"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_30"
             android:text="@string/singer"
-            android:textSize="@dimen/sp_20"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp_15"
             app:layout_constraintLeft_toRightOf="@id/imageViewPoster"
             />
 
         <TextView
             android:id="@+id/textViewSong"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_200"
             android:layout_height="wrap_content"
             android:text="@string/song"
-            android:textSize="@dimen/sp_20"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp_15"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="@id/textViewSinger"
             app:layout_constraintTop_toBottomOf="@id/textViewSinger"
