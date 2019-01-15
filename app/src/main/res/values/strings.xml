@@ -15,4 +15,5 @@
     <string name="ambient">ambient</string>
     <string name="classical">classical</string>
     <string name="country">country</string>
+    <string name="no_internet">No Internet</string>
 </resources>

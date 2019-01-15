@@ -20,7 +20,7 @@ public class GenresPresenter implements GenresContract.Presenter {
 
     @Override
     public void getSongsWithGenres(String genres) {
-        mSongRepository.getDataRemote(new DataRemoteListener() {
+        mSongRepository.getSongsByGenresRemote(genres, new DataRemoteListener() {
             @Override
             public void onFetchSongSuccess(List<Song> songs) {
                 mView.onGetSongsWithGenresSuccess(songs);
@@ -30,6 +30,6 @@ public class GenresPresenter implements GenresContract.Presenter {
             public void onFetchSongError(Exception ex) {
                 mView.onError(ex);
             }
-        }, genres);
+        });
     }
 }

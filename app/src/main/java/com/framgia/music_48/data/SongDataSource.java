@@ -9,6 +9,6 @@ public interface SongDataSource {
     }
 
     interface remoteDataSource {
-        void getDataRemote(DataRemoteListener dataRemoteListener, String genres);
+        void SongsByGenresRemote(String genres, DataRemoteListener dataRemoteListener);
     }
 }

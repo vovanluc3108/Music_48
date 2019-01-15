@@ -1,4 +1,4 @@
-package com.framgia.music_48.screen.Home.Adapter;
+package com.framgia.music_48.screen.GenresDetail.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +15,11 @@ import com.framgia.music_48.utils.ParseDuration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
+public class GenresDetailAdapter
+        extends RecyclerView.Adapter<GenresDetailAdapter.GenresDetailHolder> {
     private List<Song> mSongs;
 
-    public HomeAdapter() {
+    public GenresDetailAdapter() {
         mSongs = new ArrayList<>();
     }
 
@@ -33,15 +34,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     @NonNull
     @Override
-    public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public GenresDetailHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.item_home, viewGroup, false);
-        return new HomeViewHolder(view);
+        View view = inflater.inflate(R.layout.item_genres_detail, viewGroup, false);
+        return new GenresDetailHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeViewHolder viewHolder, int i) {
-        viewHolder.bindData(mSongs.get(i));
+    public void onBindViewHolder(@NonNull GenresDetailHolder genresDetailHolder, int i) {
+        genresDetailHolder.bindData(mSongs.get(i));
     }
 
     @Override
@@ -49,14 +50,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         return mSongs != null ? mSongs.size() : 0;
     }
 
-    static class HomeViewHolder extends RecyclerView.ViewHolder {
+    static class GenresDetailHolder extends RecyclerView.ViewHolder {
 
         private ImageView mImageViewPoster;
         private TextView mTextViewSong;
         private TextView mTextViewSinger;
         private TextView mTextViewFullDuration;
 
-        HomeViewHolder(@NonNull View itemView) {
+        GenresDetailHolder(@NonNull View itemView) {
             super(itemView);
             mImageViewPoster = itemView.findViewById(R.id.imageViewPoster);
             mTextViewSong = itemView.findViewById(R.id.textViewSong);
