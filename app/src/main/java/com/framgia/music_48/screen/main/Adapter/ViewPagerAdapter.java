@@ -5,9 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import com.framgia.music_48.R;
+import com.framgia.music_48.screen.Genres.GenresFragment;
 import com.framgia.music_48.screen.Home.HomeFragment;
 
 import static com.framgia.music_48.utils.OptionTab.TAB_COUNT;
+import static com.framgia.music_48.utils.OptionTab.TAB_GENRES;
 import static com.framgia.music_48.utils.OptionTab.TAB_HOME;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -23,6 +25,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case TAB_HOME:
                 return HomeFragment.newInstance(mContext.getString(R.string.home), TAB_HOME);
+            case TAB_GENRES:
+                return GenresFragment.newInstance();
             default:
                 return HomeFragment.newInstance(mContext.getString(R.string.home), TAB_HOME);
         }
