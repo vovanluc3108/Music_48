@@ -7,7 +7,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import com.framgia.music_48.R;
-import com.framgia.music_48.screen.main.Adapter.ViewPagerAdapter;
+import com.framgia.music_48.screen.main.adapter.ViewPagerAdapter;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {

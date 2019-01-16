@@ -1,4 +1,4 @@
-package com.framgia.music_48.screen.Home;
+package com.framgia.music_48.screen.home;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +14,7 @@ import com.framgia.music_48.data.SongRepository;
 import com.framgia.music_48.data.model.Song;
 import com.framgia.music_48.data.source.local.SongLocalDataSource;
 import com.framgia.music_48.data.source.remote.SongRemoteDataSource;
-import com.framgia.music_48.screen.Home.Adapter.HomeAdapter;
+import com.framgia.music_48.screen.home.Adapter.HomeAdapter;
 import java.util.List;
 import java.util.Objects;
 

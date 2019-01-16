@@ -1,4 +1,4 @@
-package com.framgia.music_48.screen.Genres;
+package com.framgia.music_48.screen.genres;
 
 import com.framgia.music_48.data.model.Song;
 import com.framgia.music_48.utils.BasePresenter;

@@ -1,12 +1,12 @@
-package com.framgia.music_48.screen.main.Adapter;
+package com.framgia.music_48.screen.main.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import com.framgia.music_48.R;
-import com.framgia.music_48.screen.Genres.GenresFragment;
-import com.framgia.music_48.screen.Home.HomeFragment;
+import com.framgia.music_48.screen.genres.GenresFragment;
+import com.framgia.music_48.screen.home.HomeFragment;
 
 import static com.framgia.music_48.utils.OptionTab.TAB_COUNT;
 import static com.framgia.music_48.utils.OptionTab.TAB_GENRES;

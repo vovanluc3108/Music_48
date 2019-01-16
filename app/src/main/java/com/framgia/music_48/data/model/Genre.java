@@ -1,9 +1,9 @@
 package com.framgia.music_48.data.model;
 
-public class Genres {
+public class Genre {
     private String mImageGenres;
 
-    public Genres(String imageGenres) {
+    public Genre(String imageGenres) {
         mImageGenres = imageGenres;
     }
 

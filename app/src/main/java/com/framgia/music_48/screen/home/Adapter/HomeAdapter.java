@@ -1,4 +1,4 @@
-package com.framgia.music_48.screen.GenresDetail.Adapter;
+package com.framgia.music_48.screen.home.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -15,11 +15,10 @@ import com.framgia.music_48.utils.ParseDuration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenresDetailAdapter
-        extends RecyclerView.Adapter<GenresDetailAdapter.GenresDetailHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     private List<Song> mSongs;
 
-    public GenresDetailAdapter() {
+    public HomeAdapter() {
         mSongs = new ArrayList<>();
     }
 
@@ -34,15 +33,15 @@ public class GenresDetailAdapter
 
     @NonNull
     @Override
-    public GenresDetailHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.item_genres_detail, viewGroup, false);
-        return new GenresDetailHolder(view);
+        View view = inflater.inflate(R.layout.item_home, viewGroup, false);
+        return new HomeViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GenresDetailHolder genresDetailHolder, int i) {
-        genresDetailHolder.bindData(mSongs.get(i));
+    public void onBindViewHolder(@NonNull HomeViewHolder viewHolder, int i) {
+        viewHolder.bindData(mSongs.get(i));
     }
 
     @Override
@@ -50,14 +49,14 @@ public class GenresDetailAdapter
         return mSongs != null ? mSongs.size() : 0;
     }
 
-    static class GenresDetailHolder extends RecyclerView.ViewHolder {
+    static class HomeViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView mImageViewPoster;
         private TextView mTextViewSong;
         private TextView mTextViewSinger;
         private TextView mTextViewFullDuration;
 
-        GenresDetailHolder(@NonNull View itemView) {
+        HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             mImageViewPoster = itemView.findViewById(R.id.imageViewPoster);
             mTextViewSong = itemView.findViewById(R.id.textViewSong);
