@@ -1,4 +1,4 @@
-package com.framgia.music_48.screen.Home;
+package com.framgia.music_48.screen.home;
 
 import com.framgia.music_48.data.SongRepository;
 import com.framgia.music_48.data.model.Song;

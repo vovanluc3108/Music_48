@@ -1,4 +1,4 @@
-package com.framgia.music_48.screen.Genres.Adapter;
+package com.framgia.music_48.screen.genres.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,19 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.framgia.music_48.R;
-import com.framgia.music_48.data.model.Genres;
-import com.framgia.music_48.utils.OnRecyclerViewClickListener;
+import com.framgia.music_48.data.model.Genre;
+import com.framgia.music_48.utils.OnItemClickListener;
 import java.util.List;
 
 public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenresHolder> {
-    private List<Genres> mGenres;
-    private OnRecyclerViewClickListener mListener;
+    private List<Genre> mGenres;
+    private OnItemClickListener<Integer> mListener;
 
-    public GenresAdapter(List<Genres> genres) {
+    public GenresAdapter(List<Genre> genres) {
         mGenres = genres;
     }
 
-    public void setItemClickListener(OnRecyclerViewClickListener listener) {
+    public void setItemClickListener(OnItemClickListener<Integer> listener) {
         mListener = listener;
     }
 
@@ -44,16 +44,16 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenresHold
     static class GenresHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public static final String DRAWABLE = "drawable";
         private ImageView mImageViewGenres;
-        private OnRecyclerViewClickListener mListener;
+        private OnItemClickListener<Integer> mListener;
 
-        public GenresHolder(@NonNull View itemView, OnRecyclerViewClickListener listener) {
+        public GenresHolder(@NonNull View itemView, OnItemClickListener<Integer> listener) {
             super(itemView);
             mImageViewGenres = itemView.findViewById(R.id.imageGenres);
             mListener = listener;
             itemView.setOnClickListener(this);
         }
 
-        void bindData(Genres genres) {
+        void bindData(Genre genres) {
             mImageViewGenres.setImageResource(itemView.getResources()
                     .getIdentifier(genres.getImageGenres(), DRAWABLE,
                             itemView.getContext().getPackageName()));
@@ -62,7 +62,7 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenresHold
         @Override
         public void onClick(View v) {
             if (mListener != null) {
-                mListener.onItemClick(getAdapterPosition());
+                mListener.onClickListener(getAdapterPosition());
             }
         }
     }

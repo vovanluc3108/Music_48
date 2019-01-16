@@ -1,4 +1,4 @@
-package com.framgia.music_48.screen.Genres;
+package com.framgia.music_48.screen.genres;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.framgia.music_48.R;
-import com.framgia.music_48.data.model.Genres;
-import com.framgia.music_48.screen.Genres.Adapter.GenresAdapter;
-import com.framgia.music_48.screen.GenresDetail.GenresDetailFragment;
+import com.framgia.music_48.data.model.Genre;
+import com.framgia.music_48.screen.genres.adapter.GenresAdapter;
+import com.framgia.music_48.screen.listmusicdetail.ListMusicFragment;
 import com.framgia.music_48.utils.Navigator;
-import com.framgia.music_48.utils.OnRecyclerViewClickListener;
+import com.framgia.music_48.utils.OnItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +28,7 @@ import static com.framgia.music_48.utils.GenresTab.AUDIO;
 import static com.framgia.music_48.utils.GenresTab.CLASSICAL;
 import static com.framgia.music_48.utils.GenresTab.COUNTRY;
 
-public class GenresFragment extends Fragment implements OnRecyclerViewClickListener {
+public class GenresFragment extends Fragment implements OnItemClickListener<Integer> {
     public static final String TAG = GenresFragment.class.getSimpleName();
     private Navigator mNavigator;
 
@@ -54,40 +54,40 @@ public class GenresFragment extends Fragment implements OnRecyclerViewClickListe
         genresAdapter.setItemClickListener(this);
     }
 
-    private List<Genres> getListGenres() {
-        List<Genres> genresList = new ArrayList<>();
-        genresList.add(new Genres(getString(R.string.audio)));
-        genresList.add(new Genres(getString(R.string.alternative_rock)));
-        genresList.add(new Genres(getString(R.string.ambient)));
-        genresList.add(new Genres(getString(R.string.classical)));
-        genresList.add(new Genres(getString(R.string.country)));
-        return genresList;
+    private List<Genre> getListGenres() {
+        List<Genre> genres = new ArrayList<>();
+        genres.add(new Genre(getString(R.string.audio)));
+        genres.add(new Genre(getString(R.string.alternative_rock)));
+        genres.add(new Genre(getString(R.string.ambient)));
+        genres.add(new Genre(getString(R.string.classical)));
+        genres.add(new Genre(getString(R.string.country)));
+        return genres;
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onClickListener(Integer position) {
         switch (position) {
             case AUDIO:
                 mNavigator.addFragment(getFragmentManager(), R.id.fragment,
-                        GenresDetailFragment.newInstance(AUDIO_GENRES), true, GenresFragment.TAG);
+                        ListMusicFragment.newInstance(AUDIO_GENRES), true, GenresFragment.TAG);
                 break;
             case ALTERNATIVE_ROCK:
                 mNavigator.addFragment(getFragmentManager(), R.id.fragment,
-                        GenresDetailFragment.newInstance(ALTERNATIVE_ROCK_GENRES), true,
+                        ListMusicFragment.newInstance(ALTERNATIVE_ROCK_GENRES), true,
                         GenresFragment.TAG);
                 break;
             case AMBIENT:
                 mNavigator.addFragment(getFragmentManager(), R.id.fragment,
-                        GenresDetailFragment.newInstance(AMBIENT_GENRES), true, GenresFragment.TAG);
+                        ListMusicFragment.newInstance(AMBIENT_GENRES), true, GenresFragment.TAG);
                 break;
             case CLASSICAL:
                 mNavigator.addFragment(getFragmentManager(), R.id.fragment,
-                        GenresDetailFragment.newInstance(CLASSICAL_GENRES), true,
+                        ListMusicFragment.newInstance(CLASSICAL_GENRES), true,
                         GenresFragment.TAG);
                 break;
             case COUNTRY:
                 mNavigator.addFragment(getFragmentManager(), R.id.fragment,
-                        GenresDetailFragment.newInstance(COUNTRY_GENRES), true, GenresFragment.TAG);
+                        ListMusicFragment.newInstance(COUNTRY_GENRES), true, GenresFragment.TAG);
                 break;
         }
     }

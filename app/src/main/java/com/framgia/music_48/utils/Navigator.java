@@ -3,7 +3,7 @@ package com.framgia.music_48.utils;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import com.framgia.music_48.screen.Genres.GenresFragment;
+import com.framgia.music_48.screen.genres.GenresFragment;
 
 public class Navigator {
     public void addFragment(FragmentManager fragmentManager, int containerViewId,
