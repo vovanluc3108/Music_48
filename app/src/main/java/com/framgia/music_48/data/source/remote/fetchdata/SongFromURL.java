@@ -19,6 +19,7 @@ public class SongFromURL extends AsyncTask<String, Void, List<Song>> {
     private static final String METHOD_GET = "GET";
     private static final String COLLECTION = "collection";
     private DataRemoteListener mDataRemoteListener;
+    private Exception mExceptionError;
 
     public SongFromURL(DataRemoteListener dataRemoteListener) {
         mDataRemoteListener = dataRemoteListener;
@@ -31,7 +32,7 @@ public class SongFromURL extends AsyncTask<String, Void, List<Song>> {
             String json = getJSonFromURL(strings[0]);
             songs = readJSonFromURL(json);
         } catch (IOException | JSONException e) {
-            mDataRemoteListener.onFetchSongError(e);
+            mExceptionError = e;
         }
         return songs;
     }
@@ -40,6 +41,9 @@ public class SongFromURL extends AsyncTask<String, Void, List<Song>> {
     protected void onPostExecute(List<Song> songs) {
         if (songs != null) {
             mDataRemoteListener.onFetchSongSuccess(songs);
+        }
+        if (mExceptionError != null) {
+            mDataRemoteListener.onFetchSongError(mExceptionError);
         }
     }
 
