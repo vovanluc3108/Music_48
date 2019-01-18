@@ -9,4 +9,9 @@
     <color name="color_brown_100">#596778</color>
     <color name="color_brown_300">#FFA98E8E</color>
     <color name="color_grey_900">#2b2828</color>
+    <color name="color_green_e7f">#E41FB619</color>
+    <color name="color_green_e7">#E41A9617</color>
+    <color name="color_green_300">#67EB00</color>
+    <color name="color_orange_200">#F3511E</color>
+    <color name="color_pink_200">#c51162</color>
 </resources>

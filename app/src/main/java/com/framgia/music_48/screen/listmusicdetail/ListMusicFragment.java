@@ -76,7 +76,7 @@ public class ListMusicFragment extends Fragment
 
     @Override
     public void onError(Exception ex) {
-        Toast.makeText(getContext(), "" + ex.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.check_connection, Toast.LENGTH_SHORT).show();
     }
 
     @Override
