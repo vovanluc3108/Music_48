@@ -1,5 +1,6 @@
 package com.framgia.music_48.screen.listmusicdetail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.framgia.music_48.screen.genres.GenresContract;
 import com.framgia.music_48.screen.genres.GenresPresenter;
 import com.framgia.music_48.screen.listmusicdetail.adapter.ListMusicAdapter;
 import com.framgia.music_48.screen.playmusic.PlayMusicActivity;
+import com.framgia.music_48.service.MusicService;
 import com.framgia.music_48.utils.OnItemClickListener;
 import java.util.List;
 import java.util.Objects;
@@ -81,7 +83,10 @@ public class ListMusicFragment extends Fragment
 
     @Override
     public void onClickListener(Integer position) {
-        startActivity(
-                PlayMusicActivity.getPlayMusicIntent(getContext(), mSongs.get(position), position));
+        startActivity(PlayMusicActivity.getPlayMusicIntent(getContext(), mSongs.get(position)));
+        if (getActivity() != null){
+            Intent intent = MusicService.getIntentService(getActivity(), mSongs, position);
+            getActivity().startService(intent);
+        }
     }
 }
