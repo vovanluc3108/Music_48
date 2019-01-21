@@ -1,7 +1,6 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/all_background"
@@ -126,7 +125,7 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewPrevious"
-        app:srcCompat="@drawable/ic_button_shuffle"
+        app:srcCompat="@drawable/ic_button_non_shuffle"
         />
 
     <ImageView
@@ -194,7 +193,7 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/imageViewNext"
         app:layout_constraintTop_toTopOf="@+id/imageViewNext"
-        app:srcCompat="@drawable/ic_button_loop"
+        app:srcCompat="@drawable/ic_button_non_loop"
         />
 
     <android.support.constraint.Guideline
