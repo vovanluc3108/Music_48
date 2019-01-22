@@ -1,16 +1,20 @@
 package com.framgia.music_48.service;
 
+import android.app.DownloadManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.Parcelable;
 import android.os.PowerManager;
 import android.support.annotation.Nullable;
+import com.framgia.music_48.R;
 import com.framgia.music_48.data.model.Song;
 import com.framgia.music_48.utils.Constant;
 import com.framgia.music_48.utils.Loop;
@@ -227,6 +231,27 @@ public class MusicService extends Service
         }
 
         musicPlay();
+    }
+
+    public void downloadSong() {
+        DownloadManager manager = (DownloadManager) this.getSystemService(DOWNLOAD_SERVICE);
+        String linkDownload = mSongs.get(mPosition).getStreamUrl();
+        if (linkDownload != null) {
+            Uri uri = Uri.parse(linkDownload);
+            DownloadManager.Request request = new DownloadManager.Request(uri);
+            request.setNotificationVisibility(
+                    DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION)
+                    .setDescription(getString(R.string.download))
+                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,
+                            mSongs.get(mPosition).getTitle() + ".mp3");
+            request.allowScanningByMediaScanner();
+            assert manager != null;
+            manager.enqueue(request);
+        }
+    }
+
+    public boolean checkDownloadable() {
+        return mSongs.get(mPosition).isDownloadable();
     }
 
     public MediaPlayer getMediaPlayer() {

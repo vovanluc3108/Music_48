@@ -79,6 +79,7 @@ public class SongFromURL extends AsyncTask<String, Void, List<Song>> {
             String download_url = objectCollection.getString(Song.SongEntry.DOWNLOAD_URL);
             String stream_url = Constant.SITE_TRACKS+ Constant.TRACKS+
                     id+ Constant.STREAM + Constant.API_KEY_TRACK;
+            String downloadable = objectCollection.getString(Song.SongEntry.DOWNLOADABLE);
             JSONObject objectUser = objectCollection.getJSONObject(Song.SongEntry.USER);
             String artist = objectUser.getString(Song.SongEntry.ARTIST);
             Song song = new Song.SongBuilder().setFullDuration(full_duration)
@@ -88,6 +89,7 @@ public class SongFromURL extends AsyncTask<String, Void, List<Song>> {
                     .setSinger(artist)
                     .setUrl(download_url)
                     .setStreamUrl(stream_url)
+                    .setDownload(Boolean.parseBoolean(downloadable))
                     .build();
             songs.add(song);
         }

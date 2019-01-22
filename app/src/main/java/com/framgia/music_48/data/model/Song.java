@@ -22,6 +22,7 @@ public class Song implements Parcelable {
     private String mFullDuration;
     private String mUrl;
     private String mStreamUrl;
+    private boolean mIsDownloadable;
 
     private Song(SongBuilder songBuilder) {
         mId = songBuilder.mId;
@@ -31,6 +32,7 @@ public class Song implements Parcelable {
         mFullDuration = songBuilder.mFullDuration;
         mUrl = songBuilder.mUrl;
         mStreamUrl = songBuilder.mStreamUrl;
+        mIsDownloadable = songBuilder.mIsDownload;
     }
 
     protected Song(Parcel in) {
@@ -41,6 +43,15 @@ public class Song implements Parcelable {
         mFullDuration = in.readString();
         mUrl = in.readString();
         mStreamUrl = in.readString();
+        mIsDownloadable = in.readByte() != 0;
+    }
+
+    public boolean isDownloadable() {
+        return mIsDownloadable;
+    }
+
+    public void setDownloadable(boolean downloadable) {
+        mIsDownloadable = downloadable;
     }
 
     public String getStreamUrl() {
@@ -113,6 +124,7 @@ public class Song implements Parcelable {
         dest.writeString(mFullDuration);
         dest.writeString(mUrl);
         dest.writeString(mStreamUrl);
+        dest.writeByte((byte) (mIsDownloadable ? 1 : 0));
     }
 
     public static class SongBuilder {
@@ -123,6 +135,7 @@ public class Song implements Parcelable {
         private String mFullDuration;
         private String mUrl;
         private String mStreamUrl;
+        private boolean mIsDownload;
 
         public SongBuilder setID(String id) {
             mId = id;
@@ -154,8 +167,13 @@ public class Song implements Parcelable {
             return this;
         }
 
-        public SongBuilder setStreamUrl(String streamUrl){
+        public SongBuilder setStreamUrl(String streamUrl) {
             mStreamUrl = streamUrl;
+            return this;
+        }
+
+        public SongBuilder setDownload(boolean download) {
+            mIsDownload = download;
             return this;
         }
 
@@ -173,5 +191,6 @@ public class Song implements Parcelable {
         public static final String ARTWORK_URL = "artwork_url";
         public static final String FULL_DURATION = "full_duration";
         public static final String DOWNLOAD_URL = "download_url";
+        public static final String DOWNLOADABLE = "downloadable";
     }
 }

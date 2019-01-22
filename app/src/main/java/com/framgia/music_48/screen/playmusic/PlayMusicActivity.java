@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.framgia.music_48.R;
@@ -27,6 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PlayMusicActivity extends AppCompatActivity
         implements ServiceContract.onMediaPlayer, View.OnClickListener,
         SeekBar.OnSeekBarChangeListener {
+    public static final int REQUEST_CODE = 148;
     private ImageView mImageViewBack;
     private ImageView mImageViewPlay;
     private ImageView mImageViewDownload;
@@ -137,6 +139,7 @@ public class PlayMusicActivity extends AppCompatActivity
         mImageViewLoop.setOnClickListener(this);
         mImageViewShuffle.setOnClickListener(this);
         mSeekBarMusic.setOnSeekBarChangeListener(this);
+        mImageViewDownload.setOnClickListener(this);
     }
 
     @Override
@@ -215,6 +218,13 @@ public class PlayMusicActivity extends AppCompatActivity
                 break;
             case R.id.imageViewShuffle:
                 mMusicService.setShuffleListener();
+                break;
+            case R.id.imageViewDownload:
+                if (mMusicService.checkDownloadable()) {
+                    mMusicService.downloadSong();
+                } else {
+                    Toast.makeText(this, R.string.download_not_able, Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.imageViewBack:
                 finish();

@@ -68,25 +68,25 @@ public class GenresFragment extends Fragment implements OnItemClickListener<Inte
     public void onClickListener(Integer position) {
         switch (position) {
             case AUDIO:
-                mNavigator.addFragment(getFragmentManager(), R.id.fragment,
+                mNavigator.addFragment(getFragmentManager(), R.id.drawerLayoutMain,
                         ListMusicFragment.newInstance(AUDIO_GENRES), true, GenresFragment.TAG);
                 break;
             case ALTERNATIVE_ROCK:
-                mNavigator.addFragment(getFragmentManager(), R.id.fragment,
+                mNavigator.addFragment(getFragmentManager(), R.id.drawerLayoutMain,
                         ListMusicFragment.newInstance(ALTERNATIVE_ROCK_GENRES), true,
                         GenresFragment.TAG);
                 break;
             case AMBIENT:
-                mNavigator.addFragment(getFragmentManager(), R.id.fragment,
+                mNavigator.addFragment(getFragmentManager(), R.id.drawerLayoutMain,
                         ListMusicFragment.newInstance(AMBIENT_GENRES), true, GenresFragment.TAG);
                 break;
             case CLASSICAL:
-                mNavigator.addFragment(getFragmentManager(), R.id.fragment,
+                mNavigator.addFragment(getFragmentManager(), R.id.drawerLayoutMain,
                         ListMusicFragment.newInstance(CLASSICAL_GENRES), true,
                         GenresFragment.TAG);
                 break;
             case COUNTRY:
-                mNavigator.addFragment(getFragmentManager(), R.id.fragment,
+                mNavigator.addFragment(getFragmentManager(), R.id.drawerLayoutMain,
                         ListMusicFragment.newInstance(COUNTRY_GENRES), true, GenresFragment.TAG);
                 break;
         }

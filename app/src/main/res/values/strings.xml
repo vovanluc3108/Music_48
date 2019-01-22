@@ -19,4 +19,6 @@
     <string name="_00_00">00:00</string>
     <string name="check_internet">Please Check Your Internet</string>
     <string name="check_connection">Please Check Your Connection</string>
+    <string name="download">Download ....</string>
+    <string name="download_not_able">Download not available</string>
 </resources>

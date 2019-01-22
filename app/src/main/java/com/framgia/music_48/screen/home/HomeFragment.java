@@ -1,10 +1,14 @@
 package com.framgia.music_48.screen.home;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +26,17 @@ import com.framgia.music_48.utils.OnItemClickListener;
 import java.util.List;
 import java.util.Objects;
 
-public class HomeFragment extends Fragment implements HomeContract.View,
-        OnItemClickListener<Integer> {
+public class HomeFragment extends Fragment
+        implements HomeContract.View, OnItemClickListener<Integer>,
+        SwipeRefreshLayout.OnRefreshListener {
 
+    public static final int REQUEST_CODE = 111;
     private final static String ARGUMENT_PAGE = "ARGUMENT_PAGE";
     private final static String ARGUMENT_TITLE = "ARGUMENT_TITLE";
     private HomeAdapter mHomeAdapter;
     private List<Song> mSongs;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private HomeContract.Presenter mPresenter;
 
     public static HomeFragment newInstance(String title, int page) {
         HomeFragment homeFragment = new HomeFragment();
@@ -54,6 +62,8 @@ public class HomeFragment extends Fragment implements HomeContract.View,
         mHomeAdapter = new HomeAdapter();
         recyclerViewHome.setAdapter(mHomeAdapter);
         mHomeAdapter.setListener(this);
+        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
     }
 
     private void initPresenter() {
@@ -62,9 +72,9 @@ public class HomeFragment extends Fragment implements HomeContract.View,
         SongRemoteDataSource songRemoteDataSource = SongRemoteDataSource.getsInstance();
         SongRepository songRepository =
                 SongRepository.getsInstance(songLocalDataSource, songRemoteDataSource);
-        HomeContract.Presenter presenter = new HomePresenter(songRepository);
-        presenter.setView(this);
-        presenter.getSongsLocal();
+        mPresenter = new HomePresenter(songRepository);
+        mPresenter.setView(this);
+        mPresenter.getSongsLocal();
     }
 
     @Override
@@ -83,9 +93,43 @@ public class HomeFragment extends Fragment implements HomeContract.View,
     @Override
     public void onClickListener(Integer position) {
         startActivity(PlayMusicActivity.getPlayMusicIntent(getContext(), mSongs.get(position)));
-        if (getActivity() != null){
+        if (getActivity() != null) {
             Intent intent = MusicService.getIntentService(getActivity(), mSongs, position);
             getActivity().startService(intent);
         }
+    }
+
+    private boolean checkPermission() {
+        if (getContext() != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
+                            REQUEST_CODE);
+                    return false;
+                }
+                return true;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+            @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            mPresenter.getSongsLocal();
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        if (checkPermission()) {
+            mPresenter.getSongsLocal();
+        }
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }
