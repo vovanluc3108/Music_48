@@ -13,18 +13,23 @@ import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import com.framgia.music_48.data.model.Song;
 import com.framgia.music_48.utils.Constant;
+import com.framgia.music_48.utils.Loop;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class MusicService extends Service
         implements MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener {
     public static final int DEFAULT_ONE = 1;
     public static final int DEFAULT_ZERO = 0;
+    public static final int NEGATIVE_ONE = -1;
     private IBinder mIBinder = new BindService();
     private MediaPlayer mPlayer;
     private int mPosition;
+    private int mLoopState;
+    private boolean mIsShuffle;
     private List<Song> mSongs = new ArrayList<>();
     private ServiceContract.onMediaPlayer mOnMediaPlayer;
 
@@ -53,6 +58,7 @@ public class MusicService extends Service
             mSongs = Objects.requireNonNull(intent.getExtras())
                     .getParcelableArrayList(Constant.BUNDLE_LIST_MUSIC);
             mPosition = intent.getExtras().getInt(Constant.BUNDLE_POSITION);
+            mIsShuffle = false;
         }
         return START_NOT_STICKY;
     }
@@ -86,6 +92,55 @@ public class MusicService extends Service
         if (mPlayer != null && isPlaying()) {
             mPlayer.stop();
             mPlayer.release();
+        }
+    }
+
+    public void setShuffleListener() {
+        mIsShuffle = !mIsShuffle;
+        if (mIsShuffle) {
+            Random random = new Random();
+            mPosition = random.nextInt(mSongs.size() - DEFAULT_ONE);
+        }
+        if (mOnMediaPlayer != null) {
+            mOnMediaPlayer.onShuffleStateListener(mIsShuffle);
+        }
+    }
+
+    public void setLoopListener() {
+        switch (mLoopState) {
+            case Loop.NON_LOOP:
+                mLoopState = Loop.ONE_LOOP;
+                break;
+            case Loop.ONE_LOOP:
+                mLoopState = Loop.ALL_LOOP;
+                break;
+            case Loop.ALL_LOOP:
+                mLoopState = Loop.NON_LOOP;
+                break;
+            default:
+                mLoopState = Loop.NON_LOOP;
+        }
+        if (mOnMediaPlayer != null) {
+            mOnMediaPlayer.onLoopStateListener(mLoopState);
+        }
+    }
+
+    private void musicLoop() {
+        switch (mLoopState) {
+            case Loop.NON_LOOP:
+                musicPlayNext();
+                break;
+            case Loop.ONE_LOOP:
+                musicPlay();
+                break;
+            case Loop.ALL_LOOP:
+                if (mPosition >= mSongs.size()) {
+                    mPosition = NEGATIVE_ONE;
+                }
+                musicPlayNext();
+                break;
+            default:
+                mLoopState = Loop.NON_LOOP;
         }
     }
 
@@ -137,6 +192,7 @@ public class MusicService extends Service
         if (mPosition < DEFAULT_ZERO) {
             mPosition = DEFAULT_ZERO;
         }
+
         musicPlay();
     }
 
@@ -149,7 +205,7 @@ public class MusicService extends Service
         if (mOnMediaPlayer != null) {
             mOnMediaPlayer.onUpdateSeekBarListener();
         }
-        musicPlayNext();
+        musicLoop();
     }
 
     @Override

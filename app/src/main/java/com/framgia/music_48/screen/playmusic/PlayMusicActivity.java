@@ -20,6 +20,7 @@ import com.framgia.music_48.data.model.Song;
 import com.framgia.music_48.service.MusicService;
 import com.framgia.music_48.service.ServiceContract;
 import com.framgia.music_48.utils.Constant;
+import com.framgia.music_48.utils.Loop;
 import com.framgia.music_48.utils.ParseDuration;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -171,10 +172,30 @@ public class PlayMusicActivity extends AppCompatActivity
 
     @Override
     public void onLoopStateListener(int loopState) {
+        updateLoop(loopState);
+    }
+
+    private void updateLoop(int loopState) {
+        switch (loopState) {
+            case Loop.NON_LOOP:
+                mImageViewLoop.setImageResource(R.drawable.ic_button_non_loop);
+                break;
+            case Loop.ONE_LOOP:
+                mImageViewLoop.setImageResource(R.drawable.ic_button_loop_one);
+                break;
+            case Loop.ALL_LOOP:
+                mImageViewLoop.setImageResource(R.drawable.ic_button_loop_all);
+                break;
+        }
     }
 
     @Override
     public void onShuffleStateListener(boolean isShuffleState) {
+        if (isShuffleState) {
+            mImageViewShuffle.setImageResource(R.drawable.ic_button_active_shuffle);
+        } else {
+            mImageViewShuffle.setImageResource(R.drawable.ic_button_non_shuffle);
+        }
     }
 
     @Override
@@ -188,6 +209,12 @@ public class PlayMusicActivity extends AppCompatActivity
                 break;
             case R.id.imageViewNext:
                 mMusicService.musicPlayNext();
+                break;
+            case R.id.imageViewLoop:
+                mMusicService.setLoopListener();
+                break;
+            case R.id.imageViewShuffle:
+                mMusicService.setShuffleListener();
                 break;
             case R.id.imageViewBack:
                 finish();
