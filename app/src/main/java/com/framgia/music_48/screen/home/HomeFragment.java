@@ -1,5 +1,6 @@
 package com.framgia.music_48.screen.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,14 +16,19 @@ import com.framgia.music_48.data.model.Song;
 import com.framgia.music_48.data.source.local.SongLocalDataSource;
 import com.framgia.music_48.data.source.remote.SongRemoteDataSource;
 import com.framgia.music_48.screen.home.Adapter.HomeAdapter;
+import com.framgia.music_48.screen.playmusic.PlayMusicActivity;
+import com.framgia.music_48.service.MusicService;
+import com.framgia.music_48.utils.OnItemClickListener;
 import java.util.List;
 import java.util.Objects;
 
-public class HomeFragment extends Fragment implements HomeContract.View {
+public class HomeFragment extends Fragment implements HomeContract.View,
+        OnItemClickListener<Integer> {
 
     private final static String ARGUMENT_PAGE = "ARGUMENT_PAGE";
     private final static String ARGUMENT_TITLE = "ARGUMENT_TITLE";
     private HomeAdapter mHomeAdapter;
+    private List<Song> mSongs;
 
     public static HomeFragment newInstance(String title, int page) {
         HomeFragment homeFragment = new HomeFragment();
@@ -47,6 +53,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         RecyclerView recyclerViewHome = view.findViewById(R.id.recyclerViewHome);
         mHomeAdapter = new HomeAdapter();
         recyclerViewHome.setAdapter(mHomeAdapter);
+        mHomeAdapter.setListener(this);
     }
 
     private void initPresenter() {
@@ -65,10 +72,20 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         if (songs != null) {
             mHomeAdapter.updateDataSongs(songs);
         }
+        mSongs = songs;
     }
 
     @Override
     public void onGetSongsLocalError() {
         Toast.makeText(getContext(), getString(R.string.message_error), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClickListener(Integer position) {
+        startActivity(PlayMusicActivity.getPlayMusicIntent(getContext(), mSongs.get(position)));
+        if (getActivity() != null){
+            Intent intent = MusicService.getIntentService(getActivity(), mSongs, position);
+            getActivity().startService(intent);
+        }
     }
 }

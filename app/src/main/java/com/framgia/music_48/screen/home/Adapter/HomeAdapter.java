@@ -11,15 +11,21 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.framgia.music_48.R;
 import com.framgia.music_48.data.model.Song;
+import com.framgia.music_48.utils.OnItemClickListener;
 import com.framgia.music_48.utils.ParseDuration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     private List<Song> mSongs;
+    private OnItemClickListener<Integer> mListener;
 
     public HomeAdapter() {
         mSongs = new ArrayList<>();
+    }
+
+    public void setListener(OnItemClickListener<Integer> listener) {
+        mListener = listener;
     }
 
     public void updateDataSongs(List<Song> songs) {
@@ -36,7 +42,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View view = inflater.inflate(R.layout.item_home, viewGroup, false);
-        return new HomeViewHolder(view);
+        return new HomeViewHolder(view, mListener);
     }
 
     @Override
@@ -49,19 +55,22 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         return mSongs != null ? mSongs.size() : 0;
     }
 
-    static class HomeViewHolder extends RecyclerView.ViewHolder {
+    static class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView mImageViewPoster;
         private TextView mTextViewSong;
         private TextView mTextViewSinger;
         private TextView mTextViewFullDuration;
+        private OnItemClickListener<Integer> mListener;
 
-        HomeViewHolder(@NonNull View itemView) {
+        HomeViewHolder(@NonNull View itemView, OnItemClickListener<Integer> listener) {
             super(itemView);
+            mListener = listener;
             mImageViewPoster = itemView.findViewById(R.id.imageViewPoster);
             mTextViewSong = itemView.findViewById(R.id.textViewSong);
             mTextViewSinger = itemView.findViewById(R.id.textViewSinger);
             mTextViewFullDuration = itemView.findViewById(R.id.textViewFullDuration);
+            itemView.setOnClickListener(this);
         }
 
         void bindData(Song song) {
@@ -74,6 +83,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                             new RequestOptions().placeholder(R.drawable.song_noimage).circleCrop())
                     .load(song.getPoster())
                     .into(mImageViewPoster);
+        }
+
+        @Override
+        public void onClick(View v) {
+           if (mListener != null){
+               mListener.onClickListener(getAdapterPosition());
+           }
         }
     }
 }

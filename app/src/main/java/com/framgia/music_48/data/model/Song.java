@@ -21,6 +21,7 @@ public class Song implements Parcelable {
     private String mPoster;
     private String mFullDuration;
     private String mUrl;
+    private String mStreamUrl;
 
     private Song(SongBuilder songBuilder) {
         mId = songBuilder.mId;
@@ -29,6 +30,7 @@ public class Song implements Parcelable {
         mPoster = songBuilder.mPoster;
         mFullDuration = songBuilder.mFullDuration;
         mUrl = songBuilder.mUrl;
+        mStreamUrl = songBuilder.mStreamUrl;
     }
 
     protected Song(Parcel in) {
@@ -38,6 +40,15 @@ public class Song implements Parcelable {
         mPoster = in.readString();
         mFullDuration = in.readString();
         mUrl = in.readString();
+        mStreamUrl = in.readString();
+    }
+
+    public String getStreamUrl() {
+        return mStreamUrl;
+    }
+
+    public void setStreamUrl(String streamUrl) {
+        mStreamUrl = streamUrl;
     }
 
     public String getId() {
@@ -101,6 +112,7 @@ public class Song implements Parcelable {
         dest.writeString(mPoster);
         dest.writeString(mFullDuration);
         dest.writeString(mUrl);
+        dest.writeString(mStreamUrl);
     }
 
     public static class SongBuilder {
@@ -110,6 +122,7 @@ public class Song implements Parcelable {
         private String mPoster;
         private String mFullDuration;
         private String mUrl;
+        private String mStreamUrl;
 
         public SongBuilder setID(String id) {
             mId = id;
@@ -138,6 +151,11 @@ public class Song implements Parcelable {
 
         public SongBuilder setUrl(String url) {
             mUrl = url;
+            return this;
+        }
+
+        public SongBuilder setStreamUrl(String streamUrl){
+            mStreamUrl = streamUrl;
             return this;
         }
 
