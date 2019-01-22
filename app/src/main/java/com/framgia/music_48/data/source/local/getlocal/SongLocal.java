@@ -43,6 +43,7 @@ public class SongLocal {
                         .setPoster(songPoster)
                         .setSinger(songArtist)
                         .setUrl(songFile)
+                        .setStreamUrl(songFile)
                         .setFullDuration(songDuration)
                         .setTitle(songTittle)
                         .build();

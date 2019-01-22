@@ -184,11 +184,7 @@ public class MusicService extends Service
         mPlayer.reset();
         try {
             mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            mPlayer.setDataSource(Constant.SITE_TRACKS
-                    + Constant.TRACKS
-                    + song.getId()
-                    + Constant.STREAM
-                    + Constant.API_KEY_TRACK);
+            mPlayer.setDataSource(song.getStreamUrl());
         } catch (IOException e) {
             e.printStackTrace();
         }

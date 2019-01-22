@@ -3,6 +3,7 @@ package com.framgia.music_48.data.source.remote.fetchdata;
 import android.os.AsyncTask;
 import com.framgia.music_48.data.model.Song;
 import com.framgia.music_48.data.source.remote.DataRemoteListener;
+import com.framgia.music_48.utils.Constant;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -76,6 +77,8 @@ public class SongFromURL extends AsyncTask<String, Void, List<Song>> {
             String artwork_url = objectCollection.getString(Song.SongEntry.ARTWORK_URL);
             String full_duration = objectCollection.getString(Song.SongEntry.FULL_DURATION);
             String download_url = objectCollection.getString(Song.SongEntry.DOWNLOAD_URL);
+            String stream_url = Constant.SITE_TRACKS+ Constant.TRACKS+
+                    id+ Constant.STREAM + Constant.API_KEY_TRACK;
             JSONObject objectUser = objectCollection.getJSONObject(Song.SongEntry.USER);
             String artist = objectUser.getString(Song.SongEntry.ARTIST);
             Song song = new Song.SongBuilder().setFullDuration(full_duration)
@@ -84,6 +87,7 @@ public class SongFromURL extends AsyncTask<String, Void, List<Song>> {
                     .setTitle(title)
                     .setSinger(artist)
                     .setUrl(download_url)
+                    .setStreamUrl(stream_url)
                     .build();
             songs.add(song);
         }
