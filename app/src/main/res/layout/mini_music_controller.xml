@@ -1,0 +1,102 @@
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/navigator_background"
+    >
+
+    <ImageView
+        android:id="@+id/imageViewPosterMini"
+        android:layout_width="@dimen/dp_72"
+        android:layout_height="@dimen/dp_50"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background"
+        />
+
+    <TextView
+        android:id="@+id/textViewSongMini"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        app:layout_constraintLeft_toRightOf="@id/imageViewPosterMini"
+        app:layout_constraintRight_toLeftOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/imageViewPosterMini"
+        />
+
+    <TextView
+        android:id="@+id/textViewSingerMini"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/imageViewPosterMini"
+        app:layout_constraintRight_toLeftOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/textViewSongMini"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6"
+        />
+
+    <ImageView
+        android:id="@+id/imageViewPlayMini"
+        android:layout_width="@dimen/dp_32"
+        android:layout_height="@dimen/dp_32"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dp_8"
+        android:stateListAnimator="@animator/animator_smooth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewNextMini"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageViewPreviousMini"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_play"
+        />
+
+    <ImageView
+        android:id="@+id/imageViewNextMini"
+        android:layout_width="@dimen/dp_32"
+        android:layout_height="@dimen/dp_32"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dp_8"
+        android:stateListAnimator="@animator/animator_smooth"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewPlayMini"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageViewPlayMini"
+        app:layout_constraintTop_toTopOf="@+id/imageViewPlayMini"
+        app:srcCompat="@drawable/ic_next"
+        />
+
+    <ImageView
+        android:id="@+id/imageViewPreviousMini"
+        android:layout_width="@dimen/dp_32"
+        android:layout_height="@dimen/dp_32"
+        android:layout_marginStart="@dimen/dp_16"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dp_8"
+        android:stateListAnimator="@animator/animator_smooth"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewPlayMini"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewPlayMini"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/imageViewPlayMini"
+        app:srcCompat="@drawable/ic_previous"
+        />
+
+</android.support.constraint.ConstraintLayout>

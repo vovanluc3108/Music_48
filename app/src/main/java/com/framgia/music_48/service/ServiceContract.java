@@ -14,4 +14,10 @@ public interface ServiceContract {
 
         void onShuffleStateListener(boolean isShuffleState);
     }
+
+    interface onMediaPlayerMini {
+        void onUpdateUIListener(Song song);
+
+        void onUpdateButtonStateListener(boolean isPlaying);
+    }
 }

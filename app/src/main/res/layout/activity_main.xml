@@ -38,6 +38,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu_bottom_navigation"
             />
+        <include
+            layout="@layout/mini_music_controller"
+            android:id="@+id/viewMiniController"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView

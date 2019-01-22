@@ -17,7 +17,6 @@ import com.framgia.music_48.utils.Loop;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class MusicService extends Service
@@ -32,6 +31,7 @@ public class MusicService extends Service
     private boolean mIsShuffle;
     private List<Song> mSongs = new ArrayList<>();
     private ServiceContract.onMediaPlayer mOnMediaPlayer;
+    private ServiceContract.onMediaPlayerMini mOnMediaPlayerMini;
 
     public static Intent getIntentService(Context context, List<Song> songs, int position) {
         Intent intent = new Intent(context, MusicService.class);
@@ -47,6 +47,10 @@ public class MusicService extends Service
         mOnMediaPlayer = onMediaPlayer;
     }
 
+    public void setOnMediaPlayerMini(ServiceContract.onMediaPlayerMini onMediaPlayerMini) {
+        mOnMediaPlayerMini = onMediaPlayerMini;
+    }
+
     @Override
     public void onCreate() {
         mIBinder = new BindService();
@@ -55,10 +59,12 @@ public class MusicService extends Service
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null) {
-            mSongs = Objects.requireNonNull(intent.getExtras())
-                    .getParcelableArrayList(Constant.BUNDLE_LIST_MUSIC);
-            mPosition = intent.getExtras().getInt(Constant.BUNDLE_POSITION);
-            mIsShuffle = false;
+            List<Song> songs = intent.getParcelableArrayListExtra(Constant.BUNDLE_LIST_MUSIC);
+            if (songs != null) {
+                mSongs = songs;
+                mPosition = intent.getIntExtra(Constant.BUNDLE_POSITION, 0);
+                mIsShuffle = false;
+            }
         }
         return START_NOT_STICKY;
     }
@@ -81,10 +87,40 @@ public class MusicService extends Service
         updateUI(song);
     }
 
+    public boolean checkMediaPlayer() {
+        if (mSongs.size() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void playPauseSong() {
+        if (isPlaying()) {
+            mPlayer.pause();
+            if (mOnMediaPlayerMini != null) {
+                mOnMediaPlayerMini.onUpdateButtonStateListener(false);
+            }
+        } else {
+            mPlayer.start();
+            if (mOnMediaPlayerMini != null) {
+                mOnMediaPlayerMini.onUpdateButtonStateListener(true);
+            }
+        }
+    }
+
+    public Song getCurrentSong() {
+        return mSongs.get(mPosition);
+    }
+
     private void updateUI(Song song) {
         if (mOnMediaPlayer != null) {
             mOnMediaPlayer.onUpdateUIListener(song);
             mOnMediaPlayer.onUpdateButtonStateListener(false);
+        }
+        if (mOnMediaPlayerMini != null) {
+            mOnMediaPlayerMini.onUpdateUIListener(song);
+            mOnMediaPlayerMini.onUpdateButtonStateListener(false);
         }
     }
 
@@ -177,6 +213,7 @@ public class MusicService extends Service
         mPlayer.seekTo(currentDuration);
         mPlayer.start();
         mOnMediaPlayer.onUpdateButtonStateListener(true);
+        mOnMediaPlayerMini.onUpdateButtonStateListener(true);
     }
 
     public void musicPlayNext() {
@@ -215,6 +252,9 @@ public class MusicService extends Service
         if (mOnMediaPlayer != null) {
             mOnMediaPlayer.onUpdateSeekBarListener();
             mOnMediaPlayer.onUpdateButtonStateListener(true);
+        }
+        if (mOnMediaPlayerMini != null) {
+            mOnMediaPlayerMini.onUpdateButtonStateListener(true);
         }
     }
 
